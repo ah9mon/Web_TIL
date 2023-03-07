@@ -1,0 +1,65 @@
+<!--
+다음 명세에 따라 html 파일을 작성하시오.
+A.    style tag 를 활용합니다.
+B.     가장 큰 div 부터 작은 div 까지 포함 예시 화면처럼 포함 관계를 갖도록 작성합니다.
+C.     가장 큰 div
+  i.           large-box 클래스를 가집니다.
+   ii.           가로, 세로는 400px 입니다.
+    iii.           2px 의 검정색 solid 테두리를 가집니다.
+D.    중간 div
+  i.           medium-box 클래스를 가집니다.
+   ii.           가로, 세로는 200px 입니다.
+    iii.           2px 의 빨간색 dashed 테두리를 가집니다.
+E.     작은 div
+ i.           small-box 클래스를 가집니다.
+  ii.           가로, 세로는 100px 입니다.
+    iii.           2px 의 파란색 dotted 테두리를 가집니다.
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1-1</title>
+
+  <style>
+    /* 내부참조 */
+
+    .large-box{
+      height: 400px;
+      width: 400px;
+      border: 2px solid;
+      color: black;
+    }
+    .medium-box{
+      height: 200px;
+      width: 200px;
+      border: 2px dashed;
+      color: red;
+    }
+    .small-box{
+      height: 100px;
+      width: 100px;
+      border: 2px dotted;
+      color: blue;
+    }
+  </style>
+
+  <!-- 외부참조
+  <link rel="stylesheet" href="Daily1-1.css"> -->
+</head>
+<body>
+  
+  <div class="large-box">
+    <div class="medium-box">
+      <div class="small-box"> 
+      </div>
+    </div>
+  </div>
+
+
+
+</body>
+</html>

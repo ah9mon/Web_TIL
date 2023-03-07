@@ -1,0 +1,24 @@
+/* 요소 */
+h2 {
+  color: darkviolet !important ;
+}
+
+/* 요소 */
+p {
+  color: orange;
+}
+
+/* class */
+.blue {
+  color: blue;
+}
+
+/* class */
+.green {
+  color: green;
+}
+
+/* id */
+#red {
+  color: red;
+}
