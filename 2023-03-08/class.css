@@ -1,0 +1,105 @@
+.my-content {
+  margin—top: 10px;
+  margin-bottom: 10px;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  padding-top: 10px;
+  padding—bottom: 10px;
+
+  width: 100px;
+  width: 200px;
+
+  height: 100px;
+
+
+}
+
+.box {
+  background-color: aquamarine;
+  width: 100px;
+  height: 100px;
+
+  /* margin-top: 20px ; */
+  /* box 가운데정렬 */
+  /* margin-right: auto;
+  margin-left: auto;
+  
+  /* text 가운데정렬 */
+  /* text-align: center;  */ 
+}
+
+/* text를 span을 이용해서 정가운데 정렬 */
+/* text를 높이(box의 높이)를 갖는 text로 변경하는 개념 */
+/* span {
+  line-height: 100px;
+} */
+
+
+.big {
+ position: relative;
+ margin: 100px auto 500px;
+ border: 5px solid black;
+
+ width: 500px;
+ height: 500px;
+
+}
+
+.small {
+  width: 100px;
+  height: 100px;
+}
+
+.relative {
+  position: relative;
+  top: 0px;
+  left: 0px;
+}
+
+.relative2 {
+  position: relative;
+  top: 100px;
+  left: 100px;
+}
+
+.relative3 {
+  position: relative;
+  top: -100px;
+  
+}
+
+.absolute {
+  position: absolute;
+  top: 400px;
+  left: 400px;
+}
+
+.absolute2 {
+  position: absolute;
+  top: 200px;
+  left: 200px;
+}
+
+.fixed {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+}
+
+#red {
+  background-color: red;
+}
+#gold {
+  background-color: gold;
+}
+#green {
+  background-color: green;
+}
+#blue {
+  background-color: blue;
+}
+#pink {
+  background-color: pink;
+}

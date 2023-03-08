@@ -1,0 +1,26 @@
+.big {
+  width: 800px;
+  height: 800px;
+  border: 2px solid black;
+}
+
+.line-box {
+  display: flex;
+}
+
+.black-box {
+  /* display: inline; */
+  background-color: black;
+  width: 100px;
+  height: 100px;
+}
+
+.white-box {
+  /* display: inline; */
+  background-color: white;
+  width: 100px;
+  height: 100px;
+}
+
+
+
