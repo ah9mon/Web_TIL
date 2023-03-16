@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% for ar in {{articles}}  %}
+    <h1> {{ar}} </h1>
+  
+  {% endfor %}
+
+{% endblock content %}
