@@ -1,11 +1,16 @@
 from django.shortcuts import render, redirect
-from .models import Article, Comment
+from .models import Article, Comment, Hashtag
 from .forms import ArticleForm, CommentForm
 
 # Create your views here.
 def index(request):
     articles = Article.objects.all()
-    context = {'articles': articles}
+    # 현재 등록된 모든 해시태그 보기 
+    hashtags = Hashtag.objects.all()
+    context = {
+        'articles': articles,
+        'hashtags' : hashtags,
+        }
     return render(request, 'articles/index.html', context)
 
 
@@ -25,11 +30,21 @@ def detail(request, pk):
     return render(request, 'articles/detail.html', context)
 
 
+
+
+
 def create(request):
     if request.method == 'POST':
         form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
             article = form.save()
+            # Hash Tag 저장 
+            for word in article.content.split(): # 공백을 기준으로 리스트 
+                if word[0] == '#':
+                    # word랑 같은 해쉬태그가 존재하면 기존 객체 반환, 없으면 새로운 객체 생성 
+                    hashtag, created = Hashtag.objects.get_or_create(content = word) 
+                    article.hashtags.add(hashtag)
+                    
             return redirect('articles:detail', article.pk)
     else:
         form = ArticleForm()
@@ -51,6 +66,13 @@ def update(request, pk):
         form = ArticleForm(request.POST, request.FILES, instance=article)
         if form.is_valid():
             form.save()
+            # Hash Tag 저장
+            # 게시물 수정시, 새로 등록된 해시태그 검사 해주기 
+            for word in article.content.split(): # 공백을 기준으로 리스트 
+                if word[0] == '#':
+                    # word랑 같은 해쉬태그가 존재하면 기존 객체 반환, 없으면 새로운 객체 생성 
+                    hashtag, created = Hashtag.objects.get_or_create(content = word) 
+                    article.hashtags.add(hashtag)
             return redirect('articles:detail', pk=article.pk)
     else:
         form = ArticleForm(instance=article)
@@ -63,18 +85,40 @@ def update(request, pk):
 ##############################################
 
 def create_comment(request,pk):
-    # 작성할 article 객체 불러오기 
-    article = Article.objects.get(pk=pk)
-    # modelForm
-    commentForm = CommentForm(request.POST) # 사용자 입력값 받아와서, 폼 인스턴스 까지
-    parent_pk = request.POST.get('parent_pk')
-    if commentForm.is_valid():
-        comment = commentForm.save(commit=False)
-        comment.article = article # 인스턴스 자체를 넘겨야함
-        # 댓글인지 답글인지 
-        if parent_pk:
-            print('>>>')
-            parent = article.comment_set.get(pk = parent_pk)  # 댓글
-            comment.parent = parent
-        comment.save()
-    return redirect('articles:detail', article.pk)
+    if request.user.is_authenticated:
+        # 작성할 article 객체 불러오기 
+        article = Article.objects.get(pk=pk)
+        # modelForm
+        commentForm = CommentForm(request.POST) # 사용자 입력값 받아와서, 폼 인스턴스 까지
+        parent_pk = request.POST.get('parent_pk')
+        if commentForm.is_valid():
+            comment = commentForm.save(commit=False)
+            comment.article = article # 인스턴스 자체를 넘겨야함
+            # 댓글인지 답글인지 
+            if parent_pk:
+                print('>>>')
+                parent = article.comment_set.get(pk = parent_pk)  # 댓글
+                comment.parent = parent
+            comment.save()
+        return redirect('articles:detail', article.pk)
+    else:
+       return redirect('accounts:login')
+
+
+##############################################
+################## Hashtag ###################
+##############################################
+
+def hashtag(request, hashtag_pk):
+    '''
+    해쉬태그 클릭시 해쉬태그 기준으로 filter해주기
+    '''
+    hashtag = Hashtag.objects.get(pk = hashtag_pk)
+    articles = hashtag.article_set.all()
+    # 현재 등록된 모든 해시태그 보기 
+    hashtags = Hashtag.objects.all()
+    context = {
+        'articles': articles,
+        'hashtags' : hashtags,
+        }
+    return render(request, 'articles/index.html', context)    

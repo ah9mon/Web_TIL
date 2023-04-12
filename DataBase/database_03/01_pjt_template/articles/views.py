@@ -92,4 +92,23 @@ def comments_delete(request, article_pk, comment_pk):
             comment.delete()
     return redirect('articles:detail', article_pk)
 
+################################################################
+#######좋아요 구현##########
+@require_POST
+def likes(request, article_pk):
+    if request.user.is_authenticated:
+        article = Article.objects.get(pk=article_pk)
+        
+        # 좋아요 취소 
+        if article.like_users.filter(pk=request.user.pk).exists(): 
+            article.like_users.remove(request.user)
+        
+        # 좋아요
+        else:
+            article.like_users.add(request.user)
+    
+        return redirect('articles:index')
+    else:
+        return redirect('accounts:login')
+
 

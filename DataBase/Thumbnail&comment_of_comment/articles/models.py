@@ -4,6 +4,9 @@ from imagekit.models import ProcessedImageField, ImageSpecField
 
 
 # Create your models here.
+class Hashtag(models.Model):
+    content = models.CharField(max_length=30,unique=True) 
+
 class Article(models.Model):
     title = models.CharField(max_length=30)
     content = models.TextField()
@@ -16,6 +19,8 @@ class Article(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    hashtags = models.ManyToManyField(Hashtag)
 
     def __str__(self):
         return f'{self.id}번째글 - {self.title}'

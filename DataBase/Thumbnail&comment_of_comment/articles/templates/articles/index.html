@@ -1,17 +1,41 @@
 {% extends 'base.html' %} 
 
 {% block content %}
-  <h1>INDEX</h1>
+  <h1>존잘남 갤러리</h1>
   <a href="{% url 'articles:create' %}">작성하기</a>
   <hr />
-
+  <div class="container text-center">
+    <div class="row">
+      <div class="col">
+        <a href="{% url 'articles:index' %}">
+          #all
+        </a>
+      </div>
+      {% for hashtag in hashtags %} <!--해쉬태그 db에서 하나씩 꺼냄-->
+        {% if hashtag.article_set.all %} <!--해당 해쉬태그를 사용하는 글이 있으면-->
+        <div class="col">
+          <a href="{% url 'articles:hashtag' hashtag.pk %}"> 
+            {{hashtag.content}} 
+          </a>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  <hr>
   {% for article in articles %}
     <p>
       [{{article.id}}] <a href="{% url 'articles:detail' article.pk %}" id="article-title">
         {% if article.thumbnail_img %}
         <img src="{{article.thumbnail_img.url}}" />
         {% endif %}
-        {{article.title}}
+        글 제목 : {{article.title}} ||
+
+        {% if article.hashtags %}
+          {% for hashtag in article.hashtags.all %}
+          <a href="{% url 'articles:hashtag' hashtag.pk %}"> {{hashtag.content}} </a>
+          {% endfor %}
+        {% endif %}
       </a>
     </p>
     <hr />

@@ -9,4 +9,5 @@ urlpatterns = [
     path('<int:pk>/delete/', views.delete, name='delete'),
     path('<int:pk>/update/', views.update, name='update'),
     path('<int:pk>/comments', views.create_comment, name='create_comment'),
+    path('hashtag/<int:hashtag_pk>/', views.hashtag, name='hashtag'),
 ]
