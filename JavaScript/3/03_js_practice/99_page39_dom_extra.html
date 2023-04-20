@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS DOM</title>
+</head>
+<style>
+  .red {
+    color: red;
+  }
+
+  .big {
+    font-size: 32px;
+  }
+</style>
+<body>
+  <h1>selector test</h1>
+
+  <button id="event-button">커져라!</button>
+
+  <ul id="list">
+    <li class="red">apple</li>
+    <li>orange</li>
+    <li id="banana">banana</li>
+    <li>grape</li>
+    <li class="red">strawberry</li>
+  </ul>
+
+  <script>
+    // 딸기 아래에 새로운 과일 추가 
+    const mango = document.createElement('li') // li태그 새로 만들기 
+    mango.innerText = '망고!'  // 새로만든 li 태그에 망고 텍스트 넣어주기 
+
+    const parent = document.querySelector('ul') // ul 태그 하나니까 그거 가져오기 
+    parent.appendChild(mango) // parent에 망고 추가 
+
+    // apple 위에(맨 위에) 새로운 과일을 하나 더 추가하시오 
+    const pineapple = document.createElement('li')
+    pineapple.innerText = '파인애프르르를'
+
+    parent.prepend(pineapple)
+
+    // orange와 banana 사이에 새로운 과일을 하나 더 추가하시오
+    const kiwi = document.createElement('li')
+    kiwi.innerText = '키위새 까악까악'
+    
+    const banana = document.querySelector('#banana')
+
+    parent.insertBefore(kiwi, banana) // 키위를 바나나 위에 올린다
+
+    // class가 'red'인 노드 모두 삭제 
+    const red = document.querySelectorAll('.red')
+    
+    red.forEach(element => { // 반복문으로 red 모두 삭제 
+      element.remove()
+    });
+
+    // 모든 li 태그의 글자 크기 키우기 
+    const liTags = document.querySelectorAll('li')
+
+    // liTags.forEach(element => {
+    //   element.setAttribute('class', 'big')
+    // });
+    // liTags.forEach(element => {
+    //   element.classList.add('big')
+    // });
+    
+    // 버튼을 누르면 이벤트 실행하기 
+    const button = document.querySelector('#event-button')
+
+    button.addEventListener('click', () => {
+      changeFont()
+    })
+    
+    function changeFont() {
+      const liTags = document.querySelectorAll('li')
+
+      liTags.forEach (element => {
+        element.classList.add('big')
+      })
+    }
+
+
+
+  </script>
+</body>
+</html>
