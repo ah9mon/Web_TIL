@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>야옹아 이리온</button>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+      console.log('개는 멍')
+      const dogImageSearchURL = 'https://dog.ceo/api/breeds/list/all'
+      // 버튼 가져오기 
+      const btn = document.querySelector('button')
+      // 버튼 누르면 요청함
+      btn.addEventListener('click', function() {
+        dogs = []
+        axios.get(dogImageSearchURL)
+          .then((response) => {
+            console.log(response.data.message)
+            for(key in response.data.message) {
+              console.log(key)
+              console.log(response.data.message[key])
+              dogs.push(key)
+            }
+            console.log(dogs)
+            // 랜덤 인덱스 선택
+            const randomIndex = Math.floor(Math.random() * dogs.length);
+            // 랜덤한 요소 선택
+            const randomElement = dogs[randomIndex];
+            // 해당 요소의 URL
+            const randomdogImageURL = `https://dog.ceo/api/breed/${randomElement}/images/random`
+            // 새로운 GET 요청 보내기
+            axios.get(randomdogImageURL)
+              .then((response) => {
+                const divElem = document.createElement('div')
+                const h2Tag = document.createElement('h2')
+                h2Tag.innerText = '품종 : ' + randomElement
+                const imgElem = document.createElement('img')
+                imgElem.setAttribute('src', response.data.message)
+                imgElem.setAttribute('width', "400")
+                divElem.appendChild(h2Tag)
+                divElem.appendChild(imgElem)
+                document.body.appendChild(divElem)
+              })
+              .catch((error) => {
+                console.log('이미지 로드 실패', error)
+              })
+          })
+          .catch((error) => {
+            console.log('실패했다멍')
+          })
+        console.log('멍멍')
+      })
+  </script>
+</body>
+</html>
