@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    console.log('Hi')
+    
+    work()
+    .then(function() {
+      console.log('SSAFY')
+      return Promise.resolve();
+    })
+    .then(function () {
+      console.log('Bye')
+    })
+
+    function work() {
+      return new Promise(function(resolve, reject) {
+        setTimeout(() => {
+          resolve('비동기 처리 완료')
+        }, 3000);
+      })
+    }
+
+  </script>
+</body>
+</html>

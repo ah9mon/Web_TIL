@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <input type="text" id="text_input">
+        <input type="submit" value="Add" id="submit_input">
+    </form>
+
+    <script>
+        // input 생성
+        // const formTag = document.createElement('form')
+        // const input1 = document.createElement('input')
+        // const input2 = document.createElement('input')
+        // input1.setAttribute('type','text')
+        // input2.setAttribute('type','submit')
+        // input2.setAttribute('value','Add')
+        // formTag.appendChild(input1)
+        // formTag.appendChild(input2)
+        input1 = document.querySelector('#text_input')
+        input2 = document.querySelector('#submit_input')
+        formTag = document.querySelector('form')
+
+        // Todo
+        const divTag = document.createElement('div')
+        // Todo Title
+        const h1 = document.createElement('h1')
+        h1.innerText = "오늘의 Todo"
+        // Todo List
+        const ulTag = document.createElement('ul')
+        h1.appendChild(ulTag)
+
+        // body에 넣기 
+        const body = document.querySelector('body')
+        // body.appendChild(formTag)
+        body.appendChild(h1)
+
+        // Todo function
+        const AddTodo = function (event){
+            event.preventDefault() //form 제출 기능 막기 
+            data = input1.value
+            if (data.trim()) {
+                const liTag = document.createElement('li')
+                liTag.innerText = input1.value
+                ulTag.appendChild(liTag)
+                event.target.reset()
+            } else {
+                alert("할일을 입력해주세요")
+            }
+        }
+        
+        formTag.addEventListener('submit', AddTodo)
+
+
+    </script>
+</body>
+</html>
