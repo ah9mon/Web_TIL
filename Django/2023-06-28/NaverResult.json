@@ -1,0 +1,19 @@
+{
+  "lastBuildDate": "Thu, 29 Jun 2023 14:23:24 +0900",
+  "total": 1,
+  "start": 1,
+  "display": 1,
+  "items": [
+      {
+          "title": "<b>멀티캠퍼스</b>",
+          "link": "http://www.multicampus.com",
+          "category": "교육,학문>교육원,교육센터",
+          "description": "",
+          "telephone": "",
+          "address": "서울특별시 강남구 역삼동 701 서울상록빌딩",
+          "roadAddress": "서울특별시 강남구 언주로 508 서울상록빌딩",
+          "mapx": "315579",
+          "mapy": "545079"
+      }
+  ]
+}
